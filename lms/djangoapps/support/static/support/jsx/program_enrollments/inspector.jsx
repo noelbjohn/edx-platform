@@ -121,7 +121,6 @@ const validateInputs = () => {
   }
 };
 
-
 export const ProgramEnrollmentsInspectorPage = props => (
   <div>
     {JSON.stringify(props.learnerInfo) !== '{}' && (<h2> Search Results </h2>)}

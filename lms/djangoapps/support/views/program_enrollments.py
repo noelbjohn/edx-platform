@@ -174,7 +174,7 @@ class ProgramEnrollmentsInspectorView(View):
             {
                 'error': search_error,
                 'learner_program_enrollments': learner_program_enrollments,
-                'org_keys': sorted([org_key for org_key in saml_providers_with_org_key.keys()]),
+                'org_keys': sorted(saml_providers_with_org_key.keys()),
             }
         )
 
