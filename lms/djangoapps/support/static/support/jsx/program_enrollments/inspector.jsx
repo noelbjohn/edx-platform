@@ -108,6 +108,19 @@ const renderEnrollmentsSection = enrollments => (
   </div>
 );
 
+const validateInputs = () => {
+  const inputEdxUser = self.document.getElementById('edx_user');
+  const inputExternalKey = self.document.getElementById('external_key');
+  const inputAlert = self.document.getElementById('input_alert');
+  if (inputEdxUser.value && inputExternalKey.value) {
+    inputAlert.removeAttribute('hidden');
+    self.button.disabled = true;
+  } else {
+    inputAlert.setAttribute('hidden', '');
+    self.button.disabled = false;
+  }
+};
+
 
 export const ProgramEnrollmentsInspectorPage = props => (
   <div>
@@ -128,10 +141,15 @@ export const ProgramEnrollmentsInspectorPage = props => (
           dialog={props.error}
         />
       )}
+      <div id="input_alert" className={'alert alert-danger'} hidden>
+        Search either by edx username or email, or Institution user key, but not both
+      </div>
       <div key="edX_accounts">
         <InputText
+          id="edx_user"
           name="edx_user"
           label="edX account username or email"
+          onChange={validateInputs}
         />
       </div>
       <div key="school_accounts">
@@ -144,11 +162,19 @@ export const ProgramEnrollmentsInspectorPage = props => (
           }
         />
         <InputText
+          id="external_key"
           name="external_user_key"
           label="Institution user key from school. For example, GTPersonDirectoryId for GT students"
+          onChange={validateInputs}
         />
       </div>
-      <Button label="Search" type="submit" className={['btn', 'btn-primary']} />
+      <Button
+        id="search_button"
+        label="Search"
+        type="submit"
+        className={['btn', 'btn-primary']}
+        inputRef={(input) => { self.button = input; }}
+      />
     </form>
   </div>
 );
