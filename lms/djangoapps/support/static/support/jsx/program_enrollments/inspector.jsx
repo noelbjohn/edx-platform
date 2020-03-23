@@ -155,7 +155,6 @@ export const ProgramEnrollmentsInspectorPage = props => (
         <InputSelect
           name="org_key"
           label="Identity-providing institution"
-          value="Select One"
           options={
             props.orgKeys
           }
