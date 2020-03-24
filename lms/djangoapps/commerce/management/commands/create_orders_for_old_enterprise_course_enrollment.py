@@ -4,7 +4,7 @@ Management command to
 ./manage.py lms create_orders_for_old_enterprise_course_enrollment --start-index=0 --end-index=100
 ./manage.py lms create_orders_for_old_enterprise_course_enrollment --start-index=0 --end-index=100 --batch-size=20
 """
-
+import time
 import traceback
 from textwrap import dedent
 
@@ -220,6 +220,7 @@ class Command(BaseCommand):
                 invalid_enrollments += invalid
                 non_paid_enrollments += non_paid
                 new_created_order_numbers += order_numbers
+                time.sleep(1)  # to make sure request per minute could not exceed by 60
             self.stdout.write(
                 u'\tSuccessfully synced enrollments batch from {start} to {end}'.format(
                     start=offset, end=offset + enrollments_query_batch_size,
